@@ -1,0 +1,37 @@
+<div class="container">
+<div *ngIf="model">
+<form #usuarioForm = "ngForm">
+  <div class="form-group">
+    <label>Nome</label>
+    <input required type="text" required class="form-control"  name="nomeUsuario" [(ngModel)]="model.nome"/>
+  </div>
+
+  <div class="form-group">
+    <label>Sobrenome</label>
+    <input required type="text" class="form-control"  name="sobrenomeUsuario" [(ngModel)]="model.sobrenome"/>
+  </div>
+
+  <div class="form-group">
+    <label>Email</label>
+    <input required type="text" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="emailUsuario" required [(ngModel)]="model.email" >
+  </div>
+ <div class="form-group">
+    <label>Data de Nascimento</label>
+  <div class="input-group">
+    <input class="form-control"  [maxDate]="limitDate" name="dataNascimentoUsuario" ngbDatepicker #d="ngbDatepicker" required [(ngModel)]="model.dataNascimento">
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+    </div>
+  </div>
+</div>
+   <div class="form-group">
+    <label>Escolaridade</label>
+    <select required class="form-control" name="escolaridadeUsuario"  [(ngModel)]="model.escolaridade">
+      <option *ngFor="let esc of escolaridade" [value]="esc.id">{{esc.escolaridade}}</option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-success"
+  [disabled]="!usuarioForm.form.valid" (click)="onSubmit()">Submit</button>
+</form>
+</div>
+</div>
